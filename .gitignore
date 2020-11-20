@@ -87,3 +87,16 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+
+_scratch/
+
+work/
+test_data/
+.nextflow/
+.nextflow.log*
+
+*/**/work
+*/**/test_data
+*/**/.nextflow
+*/**/.nextflow.log*
