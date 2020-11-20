@@ -6,6 +6,17 @@ include { VISUALIZATION_SURVIVAL_PLOTS } from "../../modules/visualization/survi
 include { VISUALIZATION_GENDER_SURVIVAL_PLOTS } from "../../modules/visualization/gender_survival_plots/gender_survival_plots.nf"
 
 
+
+workflow GENERATE_PLOTS {
+    take: data
+
+    main:
+        VISUALIZATION_GENDER_SURVIVAL_PLOTS(data)
+        VISUALIZATION_SURVIVAL_PLOTS(data)
+
+}
+
+
 //================================================================================
 // Module test
 //================================================================================
