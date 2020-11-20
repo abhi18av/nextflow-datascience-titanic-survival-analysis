@@ -1,10 +1,7 @@
 nextflow.enable.dsl = 2
 
 
-params.publishDir = 'results'
-
-process VISUALIZATION_GENDER_SURVIVAL_PLOTS {
-    publishDir params.publishDir
+process VISUALIZATION_SURVIVAL_PLOTS {
 
     input:
     tuple path(train_csv), path(test_csv)
@@ -27,14 +24,14 @@ warnings.filterwarnings('ignore')
 data= pd.read_csv('train.csv')
 
 f,ax=plt.subplots(1,2,figsize=(18,8))
-data[['Sex','Survived']].groupby(['Sex']).mean().plot.bar(ax=ax[0])
-ax[0].set_title('Survived vs Sex')
-sns.countplot('Sex',hue='Survived',data=data,ax=ax[1])
-ax[1].set_title('Sex:Survived vs Dead')
-
+data['Survived'].value_counts().plot.pie(explode=[0,0.1],autopct='%1.1f%%',ax=ax[0],shadow=True)
+ax[0].set_title('Survived')
+ax[0].set_ylabel('')
+sns.countplot('Survived',data=data,ax=ax[1])
+ax[1].set_title('Survived')
 #plt.show()
 
-plt.savefig('gender_survival_plots.png')
+plt.savefig('survival_plots.png')
     """
 }
 
@@ -47,6 +44,6 @@ workflow test {
     input_data_ch = Channel.of(["${baseDir}/${params.train_csv}",
                                 "${baseDir}/${params.test_csv}"])
 
-    VISUALIZATION_GENDER_SURVIVAL_PLOTS(input_data_ch)
+    VISUALIZATION_SURVIVAL_PLOTS(input_data_ch)
 
 }

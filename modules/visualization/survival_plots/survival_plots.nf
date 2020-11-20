@@ -1,7 +1,9 @@
 nextflow.enable.dsl = 2
 
+params.publishDir = 'results'
 
 process VISUALIZATION_SURVIVAL_PLOTS {
+    publishDir params.publishDir
 
     input:
     tuple path(train_csv), path(test_csv)

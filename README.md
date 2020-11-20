@@ -3,7 +3,7 @@ Nextflow driven analysis of titanic_dataset
 
 This repo demonstrates the use of Nextflow in a Data Science scenario.
 
-The foundation for this template has been based on  [cookiecutter data science template](https://github.com/drivendata/cookiecutter-data-science) and the 
+The foundation for this work is based on  [cookiecutter data science template](https://github.com/drivendata/cookiecutter-data-science) and the 
 [Titanic dataset analysis](https://www.kaggle.com/ash316/eda-to-prediction-dietanic)
 
 The core use-case for Nextflow in Data Science workflows are the following 
