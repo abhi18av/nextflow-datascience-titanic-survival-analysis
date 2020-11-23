@@ -43,7 +43,7 @@ workflow FEATURE_ENGINEERING {
     data
 
     main:
-    DERIVE_FEATURES(input_data_ch)
+    DERIVE_FEATURES(data)
 
     PROCESS_NAN(
             DERIVE_FEATURES.out
