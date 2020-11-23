@@ -91,14 +91,18 @@ target/
 
 _scratch/
 
+results/
 work/
 test_data/
 .nextflow/
 .nextflow.log*
 
+*/**/results
 */**/work
 */**/test_data
 */**/.nextflow
 */**/.nextflow.log*
 
 */**/*.png
+*/**/*.dot
+
