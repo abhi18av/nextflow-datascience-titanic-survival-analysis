@@ -1,7 +1,6 @@
 nextflow.enable.dsl = 2
 
 params.publishDir = 'results'
-params.inputFileName = 'train.csv'
 params.outputFileName = 'train_fe_family.csv'
 
 process PROCESS_FARE{

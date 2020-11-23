@@ -2,7 +2,6 @@ nextflow.enable.dsl = 2
 
 
 params.publishDir = 'results'
-params.inputFileName = 'train.csv'
 params.outputFileName = 'train_fe_derived.csv'
 
 process DERIVE_FEATURES {
