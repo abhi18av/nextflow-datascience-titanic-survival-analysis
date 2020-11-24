@@ -2,7 +2,7 @@ nextflow.enable.dsl = 2
 
 params.publishDir = 'results'
 
-process MODELS_LOGISTIC_REGRESSION {
+process GRID_SVM {
     publishDir params.publishDir
 
     input:
@@ -15,13 +15,11 @@ process MODELS_LOGISTIC_REGRESSION {
     """
 #!/usr/bin/env python3
 
-from sklearn.linear_model import LogisticRegression 
-from sklearn.model_selection import train_test_split 
-from sklearn import metrics 
-from sklearn.metrics import confusion_matrix 
-
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.style.use('fivethirtyeight')
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -48,6 +46,6 @@ workflow test {
     input_data_ch = Channel.of(["${baseDir}/${params.train_csv}",
                                 "${baseDir}/${params.test_csv}"])
 
-    MODELS_LOGISTIC_REGRESSION(input_data_ch)
+    GRID_SVM(input_data_ch)
 
 }
