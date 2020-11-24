@@ -1,6 +1,6 @@
 nextflow.enable.dsl = 2
 
-params.VISUALIZATION_RESULTS_DIR = "../../reports/figures"
+params.VISUALIZATION_RESULTS_DIR = "$baseDir/reports/figures"
 
 
 

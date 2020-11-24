@@ -4,9 +4,9 @@ nextflow.enable.dsl = 2
 // Global params
 //================================================================================
 
-params.RAW_DATA_DIR = "../../data/raw"
-params.INTERIM_DATA_DIR = "../../data/interim"
-params.PROCESSED_DATA_DIR = "../../data/processed"
+params.RAW_DATA_DIR = "$baseDir/data/raw"
+params.INTERIM_DATA_DIR = "$baseDir/data/interim"
+params.PROCESSED_DATA_DIR = "$baseDir/data/processed"
 
 
 //================================================================================
