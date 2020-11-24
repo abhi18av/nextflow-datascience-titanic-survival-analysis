@@ -8,6 +8,10 @@ The foundation for this work is based on  [cookiecutter data science template](h
 
 The core use-case for Nextflow in Data Science workflows are the following 
 
+- **Reproducible**
+
+
+
 - **Easy parallelization**
 
 Once the preliminary notebook-based analysis is done and before scaling up the model development, Nextflow makes it simple to divide and parallelize the various aspects of the entire analysis.
@@ -15,16 +19,25 @@ Once the preliminary notebook-based analysis is done and before scaling up the m
 For example, visualization oriented aspects could be extracted into a separate workflow to generate all the plots for `raw data` and `processed data` etc
 
 ```
+main.nf
 |
 modules/
 └── visualization
-|    ├── gender_survival_plots
-|    └── survival_plots
+    ├── gender_survival_plots
+    └── survival_plots
+|
+└── features
+    ├── derive_features
+    ├── process_age
+    ├── process_family
+    ├── process_fare
+    ├── process_nan
+    └── replace_features
+|
 |
 workflows/
 └── generate_plots
-|
-main.nf
+└── feature_engineering
 ```
 
 - **Highly scalable**
@@ -33,14 +46,18 @@ Because of the `executor` abstraction in Nextflow, it's trivial to execute one p
 
 
 ## Getting Started
-Let's execute the visualization workflow locally with local data.
+
+Let's execute the main analysis locally with local data.
 
 ```
 nextflow run main.nf -entry MAIN -params-file test_params.yml
 ```
 
+#### Visualization workflow
 
-Now, let's execute the visualization workflow on `Tower`, a free service for simplifying the deployment and execution of Nextflow workflows. 
-...
+![Visualization workflow](./docs/visualization_flowchart.png)
 
 
+#### Feature engineering workflow
+
+![Feature Engineering workflow](./docs/feature_engineering_flowchart.png)
