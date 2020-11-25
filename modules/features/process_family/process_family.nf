@@ -28,7 +28,7 @@ data['Family_Size']=data['Parch']+data['SibSp']
 data['Alone']=0
 data.loc[data.Family_Size==0,'Alone']=1 
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
 
     """
 }

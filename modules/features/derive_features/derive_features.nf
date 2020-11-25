@@ -29,7 +29,7 @@ for i in data:
 
 data['Initial'].replace(['Mlle','Mme','Ms','Dr','Major','Lady','Countess','Jonkheer','Col','Rev','Capt','Sir','Don'],['Miss','Miss','Miss','Mr','Mr','Mrs','Mrs','Other','Other','Other','Mr','Mr','Mr'],inplace=True)
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
 
     """
 }

@@ -37,7 +37,7 @@ data.loc[(data['Age']>32)&(data['Age']<=48),'Age_band']=2
 data.loc[(data['Age']>48)&(data['Age']<=64),'Age_band']=3
 data.loc[data['Age']>64,'Age_band']=4
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
 
     """
 }

@@ -25,7 +25,7 @@ data= pd.read_csv("${train_csv}")
 
 data['Embarked'].fillna('S',inplace=True)
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
 
     """
 }

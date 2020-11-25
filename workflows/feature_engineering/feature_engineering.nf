@@ -52,6 +52,12 @@ params.REPLACE_FEATURES = [
 include { REPLACE_FEATURES } from "../../modules/features/replace_features/replace_features.nf" addParams(params.REPLACE_FEATURES)
 
 
+//-------------------------------------
+params.TEST_TRAIN_SPLIT = [
+        publishDir: params.PROCESSED_DATA_DIR
+]
+include { TEST_TRAIN_SPLIT } from "../../modules/features/test_train_split/test_train_split.nf" addParams(params.TEST_TRAIN_SPLIT)
+
 //================================================================================
 // Main workflow
 //================================================================================
@@ -83,6 +89,9 @@ workflow FEATURE_ENGINEERING {
             PROCESS_FARE.out
     )
 
+    TEST_TRAIN_SPLIT(
+            REPLACE_FEATURES.out
+    )
 
 }
 
@@ -117,5 +126,8 @@ workflow test {
             PROCESS_FARE.out
     )
 
+    TEST_TRAIN_SPLIT(
+            REPLACE_FEATURES.out
+    )
 
 }
