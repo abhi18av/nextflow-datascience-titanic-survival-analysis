@@ -1,6 +1,3 @@
-train_csv:
-  "test_data/train_fe_replace.csv"
-
-test_csv:
-  "test_data/test.csv"
+data_csv:
+  "test_data/train_fe_replaced.csv"
 
