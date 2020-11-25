@@ -29,7 +29,7 @@ data['Initial'].replace(['Mr','Mrs','Miss','Master','Other'],[0,1,2,3,4],inplace
 
 data.drop(['Name','Age','Ticket','Fare','Cabin','Fare_Range','PassengerId'],axis=1,inplace=True)
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
     """
 }
 

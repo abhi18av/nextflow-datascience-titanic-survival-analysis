@@ -2,46 +2,48 @@ nextflow.enable.dsl = 2
 
 params.publishDir = 'results'
 
-process TEST_TRAIN_SPLIT {
+process GRID_RF {
     publishDir params.publishDir
 
     input:
-    path(data_csv)
+    path(train_csv)
 
     output:
-    path("*csv")
+    path("*.csv")
 
     script:
     """
 #!/usr/bin/env python3
 
+import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split 
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.style.use('fivethirtyeight')
 import warnings
 warnings.filterwarnings('ignore')
 
-data= pd.read_csv("${data_csv}")
+data= pd.read_csv("${train_csv}")
 
 train,test=train_test_split(data,test_size=0.3,random_state=0,stratify=data['Survived'])
-
 train_X=train[train.columns[1:]]
-train_X.to_csv("train_X.csv", index=False)
-
 train_Y=train[train.columns[:1]]
-train_Y.to_csv("train_Y.csv", index=False)
-
 test_X=test[test.columns[1:]]
-test_X.to_csv("test_X.csv", index=False)
-
 test_Y=test[test.columns[:1]]
-test_Y.to_csv("test_Y.csv", index=False)
-
 X=data[data.columns[1:]]
-X.to_csv("X.csv", index=False)
-
 Y=data['Survived']
-Y.to_csv("Y.csv", index=False)
 
+
+train_X.to_csv("train_X.csv")
+train_Y.to_csv("train_Y.csv")
+
+test_X.to_csv("test_X.csv")
+test_Y.to_csv("test_Y.csv")
+
+model=svm.SVC(kernel='linear',C=0.1,gamma=0.1)
+model.fit(train_X,train_Y)
+prediction2=model.predict(test_X)
+print('Accuracy for linear SVM is',metrics.accuracy_score(prediction2,test_Y))
 
     """
 }
@@ -52,8 +54,8 @@ Y.to_csv("Y.csv", index=False)
 
 workflow test {
 
-    input_data_ch = channel.of("${baseDir}/${params.data_csv}")
+    input_data_ch = channel.of("${baseDir}/${params.train_csv}")
 
-    TEST_TRAIN_SPLIT(input_data_ch)
+    GRID_RF(input_data_ch)
 
 }

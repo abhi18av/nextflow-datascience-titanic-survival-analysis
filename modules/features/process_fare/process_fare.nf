@@ -30,7 +30,7 @@ data.loc[(data['Fare']>7.91)&(data['Fare']<=14.454),'Fare_cat']=1
 data.loc[(data['Fare']>14.454)&(data['Fare']<=31),'Fare_cat']=2
 data.loc[(data['Fare']>31)&(data['Fare']<=513),'Fare_cat']=3
 
-data.to_csv("${params.outputFileName}")
+data.to_csv("${params.outputFileName}", index=False)
     """
 }
 
