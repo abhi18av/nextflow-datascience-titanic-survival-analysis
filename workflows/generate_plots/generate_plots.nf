@@ -4,22 +4,22 @@ params.VISUALIZATION_RESULTS_DIR = "$baseDir/reports/figures"
 
 
 
-params.VISUALIZATION_SURVIVAL_PLOTS = [
+params.SURVIVAL_PLOTS = [
         publishDir: params.VISUALIZATION_RESULTS_DIR
 ]
-include { VISUALIZATION_SURVIVAL_PLOTS } from "../../modules/visualization/survival_plots/survival_plots.nf" addParams(params.VISUALIZATION_SURVIVAL_PLOTS)
+include { SURVIVAL_PLOTS } from "../../modules/visualization/survival_plots/survival_plots.nf" addParams(params.VISUALIZATION_SURVIVAL_PLOTS)
 
 
-params.VISUALIZATION_GENDER_SURVIVAL_PLOTS = [
+params.GENDER_SURVIVAL_PLOTS = [
         publishDir: params.VISUALIZATION_RESULTS_DIR
 ]
-include { VISUALIZATION_GENDER_SURVIVAL_PLOTS } from "../../modules/visualization/gender_survival_plots/gender_survival_plots.nf" addParams(params.VISUALIZATION_GENDER_SURVIVAL_PLOTS)
+include { GENDER_SURVIVAL_PLOTS } from "../../modules/visualization/gender_survival_plots/gender_survival_plots.nf" addParams(params.VISUALIZATION_GENDER_SURVIVAL_PLOTS)
 
 
-params.VISUALIZATION_PASSENGER_PCLASS_PLOTS = [
+params.PASSENGER_PCLASS_PLOTS = [
         publishDir: params.VISUALIZATION_RESULTS_DIR
 ]
-include { VISUALIZATION_PASSENGER_PCLASS_PLOTS } from "../../modules/visualization/passenger_pclass_plots/passenger_pclass_plots.nf" addParams(params.VISUALIZATION_PASSENGER_PCLASS_PLOTS)
+include { PASSENGER_PCLASS_PLOTS } from "../../modules/visualization/passenger_pclass_plots/passenger_pclass_plots.nf" addParams(params.VISUALIZATION_PASSENGER_PCLASS_PLOTS)
 
 
 workflow GENERATE_PLOTS {
@@ -27,9 +27,9 @@ workflow GENERATE_PLOTS {
     data
 
     main:
-    VISUALIZATION_GENDER_SURVIVAL_PLOTS(data)
-    VISUALIZATION_SURVIVAL_PLOTS(data)
-    VISUALIZATION_PASSENGER_PCLASS_PLOTS(data)
+    GENDER_SURVIVAL_PLOTS(data)
+    SURVIVAL_PLOTS(data)
+    PASSENGER_PCLASS_PLOTS(data)
 
 }
 

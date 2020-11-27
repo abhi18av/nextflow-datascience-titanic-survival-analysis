@@ -2,7 +2,7 @@ nextflow.enable.dsl = 2
 
 params.publishDir = 'results'
 
-process VISUALIZATION_PASSENGER_PCLASS_PLOTS {
+process PASSENGER_PCLASS_PLOTS {
     publishDir params.publishDir
 
     input:
@@ -48,6 +48,6 @@ workflow test {
     input_data_ch = Channel.of(["${baseDir}/${params.train_csv}",
                                 "${baseDir}/${params.test_csv}"])
 
-    VISUALIZATION_PASSENGER_PCLASS_PLOTS(input_data_ch)
+    PASSENGER_PCLASS_PLOTS(input_data_ch)
 
 }

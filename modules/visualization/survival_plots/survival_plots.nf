@@ -2,7 +2,7 @@ nextflow.enable.dsl = 2
 
 params.publishDir = 'results'
 
-process VISUALIZATION_SURVIVAL_PLOTS {
+process SURVIVAL_PLOTS {
     publishDir params.publishDir
 
     input:
@@ -46,6 +46,6 @@ workflow test {
     input_data_ch = Channel.of(["${baseDir}/${params.train_csv}",
                                 "${baseDir}/${params.test_csv}"])
 
-    VISUALIZATION_SURVIVAL_PLOTS(input_data_ch)
+    SURVIVAL_PLOTS(input_data_ch)
 
 }
