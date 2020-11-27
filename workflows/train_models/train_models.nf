@@ -17,6 +17,12 @@ params.LINEAR_SVM = [
 ]
 include { LINEAR_SVM } from "../../modules/models/linear_svm/linear_svm.nf" addParams(params.LINEAR_SVM)
 
+
+params.GRID_SVM = [
+        publishDir: params.MODELS_DIR
+]
+include { GRID_SVM } from "../../modules/models/grid_svm/grid_svm.nf" addParams(params.GRID_SVM)
+
 //================================================================================
 // Main workflow
 //================================================================================
@@ -27,6 +33,7 @@ workflow TRAIN_MODELS {
 
     main:
     LINEAR_SVM(train_test_data)
+    GRID_SVM(train_test_data)
 
 }
 
@@ -41,6 +48,8 @@ workflow test {
                                 "${baseDir}/${params.train_Y_csv}",
                                 "${baseDir}/${params.test_X_csv}",
                                 "${baseDir}/${params.test_Y_csv}",
+                                "${baseDir}/${params.X_csv}",
+                                "${baseDir}/${params.Y_csv}"
     ])
 
     TRAIN_MODELS(input_data_ch)

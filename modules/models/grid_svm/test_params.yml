@@ -1,6 +1,0 @@
-train_csv:
-  "test_data/train.csv"
-
-test_csv:
-  "test_data/test.csv"
-
