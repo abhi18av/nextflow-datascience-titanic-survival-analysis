@@ -98,7 +98,9 @@ test_data/
 .nextflow.log*
 
 */**/results
+*/**/models
 */**/work
+*/**/data
 */**/test_data
 */**/.nextflow
 */**/.nextflow.log*
@@ -106,3 +108,4 @@ test_data/
 */**/*.png
 */**/*.dot
 
+/notebooks/*csv

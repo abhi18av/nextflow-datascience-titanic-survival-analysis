@@ -2,9 +2,10 @@ nextflow.enable.dsl = 2
 
 
 params.publishDir = 'results'
+params.publishMode = 'copy'
 
-process VISUALIZATION_GENDER_SURVIVAL_PLOTS {
-    publishDir params.publishDir
+process GENDER_SURVIVAL_PLOTS {
+    publishDir params.publishDir, mode: params.publishMode
 
     input:
     tuple path(train_csv), path(test_csv)
@@ -47,6 +48,6 @@ workflow test {
     input_data_ch = Channel.of(["${baseDir}/${params.train_csv}",
                                 "${baseDir}/${params.test_csv}"])
 
-    VISUALIZATION_GENDER_SURVIVAL_PLOTS(input_data_ch)
+    GENDER_SURVIVAL_PLOTS(input_data_ch)
 
 }

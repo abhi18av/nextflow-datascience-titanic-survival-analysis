@@ -2,10 +2,11 @@ nextflow.enable.dsl = 2
 
 
 params.publishDir = 'results'
+params.publishMode = 'copy'
 params.outputFileName = 'train_fe_family.csv'
 
 process PROCESS_FAMILY{
-    publishDir params.publishDir
+    publishDir params.publishDir, mode: params.publishMode
 
     input:
     path(train_csv)
