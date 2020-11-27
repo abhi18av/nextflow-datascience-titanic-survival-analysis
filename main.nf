@@ -16,6 +16,10 @@ params.TEST_TRAIN_SPLIT = [
 ]
 include { TEST_TRAIN_SPLIT } from "./modules/data/test_train_split/test_train_split.nf" addParams(params.TEST_TRAIN_SPLIT)
 
+//-------------------------------------
+
+include { TRAIN_MODELS } from "./workflows/train_models/train_models.nf"
+
 
 //================================================================================
 // Main workflow
@@ -35,6 +39,10 @@ workflow MAIN {
 
     TEST_TRAIN_SPLIT(
             FEATURE_ENGINEERING.out
+    )
+
+    TRAIN_MODELS(
+            TEST_TRAIN_SPLIT.out
     )
 
 }

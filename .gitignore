@@ -98,6 +98,7 @@ test_data/
 .nextflow.log*
 
 */**/results
+*/**/models
 */**/work
 */**/data
 */**/test_data

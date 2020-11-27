@@ -3,48 +3,49 @@ nextflow.enable.dsl = 2
 params.publishDir = 'results'
 params.publishMode = 'copy'
 
-process GRID_RF {
+params.train_X_csv = "train_X.csv"
+params.train_Y_csv = "train_Y.csv"
+params.test_X_csv = "test_X.csv"
+params.test_Y_csv = "test_Y.csv"
+
+
+
+process LINEAR_SVM {
     publishDir params.publishDir, mode: params.publishMode
 
     input:
-    path(train_csv)
+    tuple path(train_X_csv), path(train_Y_csv), path(test_X_csv), path(test_Y_csv)
 
     output:
-    path("*.csv")
+    path("*_metrics.txt")
 
     script:
     """
 #!/usr/bin/env python3
 
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-plt.style.use('fivethirtyeight')
+from sklearn import svm 
+from sklearn import metrics
 import warnings
 warnings.filterwarnings('ignore')
 
-data= pd.read_csv("${train_csv}")
+train_X = pd.read_csv("${train_X_csv}")
+train_Y = pd.read_csv("${train_Y_csv}")
 
-train,test=train_test_split(data,test_size=0.3,random_state=0,stratify=data['Survived'])
-train_X=train[train.columns[1:]]
-train_Y=train[train.columns[:1]]
-test_X=test[test.columns[1:]]
-test_Y=test[test.columns[:1]]
-X=data[data.columns[1:]]
-Y=data['Survived']
+test_X = pd.read_csv("${test_X_csv}")
+test_Y = pd.read_csv("${test_Y_csv}")
 
-
-train_X.to_csv("train_X.csv")
-train_Y.to_csv("train_Y.csv")
-
-test_X.to_csv("test_X.csv")
-test_Y.to_csv("test_Y.csv")
-
-model=svm.SVC(kernel='linear',C=0.1,gamma=0.1)
+model= svm.SVC(kernel='linear',C=0.1,gamma=0.1)
 model.fit(train_X,train_Y)
-prediction2=model.predict(test_X)
-print('Accuracy for linear SVM is',metrics.accuracy_score(prediction2,test_Y))
+
+prediction2= model.predict(test_X)
+
+accuracy = metrics.accuracy_score(prediction2,test_Y)
+
+print('Accuracy for linear SVM is: ', accuracy)
+
+with open("linear_svm_metrics.txt", "w") as metrics_file: 
+    metrics_file.write("Accuracy: " + str(accuracy))
 
     """
 }
@@ -55,8 +56,12 @@ print('Accuracy for linear SVM is',metrics.accuracy_score(prediction2,test_Y))
 
 workflow test {
 
-    input_data_ch = channel.of("${baseDir}/${params.train_csv}")
+    input_data_ch = channel.of(["${baseDir}/${params.train_X_csv}",
+                                "${baseDir}/${params.train_Y_csv}",
+                                "${baseDir}/${params.test_X_csv}",
+                                "${baseDir}/${params.test_Y_csv}",
+    ])
 
-    GRID_RF(input_data_ch)
+    LINEAR_SVM(input_data_ch)
 
 }
