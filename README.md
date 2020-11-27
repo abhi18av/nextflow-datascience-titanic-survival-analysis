@@ -61,3 +61,10 @@ nextflow run main.nf -entry MAIN -params-file test_params.yml
 #### Feature engineering workflow
 
 ![Feature Engineering workflow](./docs/feature_engineering_flowchart.png)
+
+
+
+#### Model training workflow
+
+![Model Training workflow](./docs/model_training_workflow.png)
+
