@@ -55,12 +55,12 @@ nextflow run main.nf -entry MAIN -params-file test_params.yml
 
 #### Visualization workflow
 
-![Visualization workflow](./docs/visualization_flowchart.png)
+![Visualization workflow](./docs/visualization_workflow.png)
 
 
 #### Feature engineering workflow
 
-![Feature Engineering workflow](./docs/feature_engineering_flowchart.png)
+![Feature Engineering workflow](./docs/feature_engineering_workflow.png)
 
 
 
