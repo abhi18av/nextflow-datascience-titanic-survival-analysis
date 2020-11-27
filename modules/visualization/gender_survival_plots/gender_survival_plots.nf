@@ -2,9 +2,10 @@ nextflow.enable.dsl = 2
 
 
 params.publishDir = 'results'
+params.publishMode = 'copy'
 
 process GENDER_SURVIVAL_PLOTS {
-    publishDir params.publishDir
+    publishDir params.publishDir, mode: params.publishMode
 
     input:
     tuple path(train_csv), path(test_csv)
