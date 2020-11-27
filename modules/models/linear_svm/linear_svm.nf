@@ -14,7 +14,7 @@ process LINEAR_SVM {
     publishDir params.publishDir, mode: params.publishMode
 
     input:
-    tuple path(train_X_csv), path(train_Y_csv), path(test_X_csv), path(test_Y_csv)
+    tuple path(train_X_csv), path(train_Y_csv), path(test_X_csv), path(test_Y_csv), path(X_csv), path(Y_csv)
 
     output:
     path("*_metrics.txt")
@@ -60,6 +60,8 @@ workflow test {
                                 "${baseDir}/${params.train_Y_csv}",
                                 "${baseDir}/${params.test_X_csv}",
                                 "${baseDir}/${params.test_Y_csv}",
+                                "${baseDir}/${params.X_csv}",
+                                "${baseDir}/${params.Y_csv}"
     ])
 
     LINEAR_SVM(input_data_ch)
